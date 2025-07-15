@@ -84,3 +84,24 @@ test:
     # run on different Linux instances, so without this Install App won't know
     # what to install.
 outputs:publishversion:${{steps.version.outputs.publishversion}}
+deployprod:
+        # Purpose of this job is to Install App to a Prod instance. This should only 
+        # trigger if the feature branch has been merged to master after a successfully 
+        # completed pull request, hence the conditional for push to master. In other words,
+        # the first two jobs run on CI, then all three jobs run on CD. 
+        needs: test
+        name: Deploy to Prod
+        runs-on: ubuntu-latest
+        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
+        steps:
+            
+        - name: ServiceNow CI/CD Install App
+            id: install_app_prod
+            uses: ServiceNow/sncicd-install-app@1.0.0
+            with:
+                version: ${{ needs.test.outputs.publishversion }}
+            env:
+                snowUsername: ${{ secrets.SN_USERNAME }}
+                snowPassword: ${{ secrets.SN_PASSWORD }}
+                snowInstallInstance: ${{ secrets.SN_PROD_INSTANCE }}
+                appSysID: ${{ secrets.SN_APP_SYSID }}
