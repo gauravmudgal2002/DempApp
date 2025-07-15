@@ -66,28 +66,25 @@ test:
         - name: ServiceNow CI/CD Run ATF Test Suite
             uses:ServiceNow/sncicd-tests-run@1.0.0
             with:testSuiteSysId:${{ secrets.SN_ATFTESTSUITE_SYSID }}
-            env:
-                snowUsername:${{ secrets.SN_USERNAME }}
+            env:snowUsername:${{ secrets.SN_USERNAME }}
                 snowPassword:${{ secrets.SN_PASSWORD }}
                 snowInstallInstance:${{ secrets.SN_TEST_INSTANCE }}
 
         - name: ServiceNow CI/CD Rollback App
-            if: ${{ failure() && steps.install_app.outputs.rollbackVersion }}
-            uses: ServiceNow/sncicd-rollback-app@1.0.0
-            with:
-            version: ${{steps.install_app.outputs.rollbackVersion}}
-            env:
-                snowUsername: ${{ secrets.SN_USERNAME }}
-                snowPassword: ${{ secrets.SN_PASSWORD }}
-                snowInstallInstance: ${{ secrets.SN_TEST_INSTANCE }}
-                appSysID: ${{ secrets.SN_APP_SYSID }}
+            if:${{ failure() && steps.install_app.outputs.rollbackVersion }}
+            uses:ServiceNow/sncicd-rollback-app@1.0.0
+            with:version:${{steps.install_app.outputs.rollbackVersion}}
+            env:snowUsername:${{ secrets.SN_USERNAME }}
+                snowPassword:${{ secrets.SN_PASSWORD }}
+                snowInstallInstance:${{ secrets.SN_TEST_INSTANCE }}
+                appSysID:${{ secrets.SN_APP_SYSID }}
 
     # This is required to pass the version number output from Publish App 
     # to the input for Install App in the next job! This is because the jobs 
     # run on different Linux instances, so without this Install App won't know
     # what to install.
     outputs:
-        publishversion: ${{ steps.version.outputs.publishversion }}
+        publishversion:${{ steps.version.outputs.publishversion }}
 
 deployprod:
         # Purpose of this job is to Install App to a Prod instance. This should only 
@@ -97,16 +94,13 @@ deployprod:
         needs: test
         name: Deploy to Prod
         runs-on: ubuntu-latest
-        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
-        steps:
-            
+        if:${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
+        steps;            
         - name: ServiceNow CI/CD Install App
             id: install_app_prod
-            uses: ServiceNow/sncicd-install-app@1.0.0
-            with:
-                version: ${{ needs.test.outputs.publishversion }}
-            env:
-                snowUsername: ${{ secrets.SN_USERNAME }}
-                snowPassword: ${{ secrets.SN_PASSWORD }}
-                snowInstallInstance: ${{ secrets.SN_PROD_INSTANCE }}
-                appSysID: ${{ secrets.SN_APP_SYSID }}
+            uses:ServiceNow/sncicd-install-app@1.0.0
+            with:version:${{ needs.test.outputs.publishversion }}
+            env:snowUsername:${{ secrets.SN_USERNAME }}
+                snowPassword:${{ secrets.SN_PASSWORD }}
+                snowInstallInstance:${{ secrets.SN_PROD_INSTANCE }}
+                appSysID:${{ secrets.SN_APP_SYSID }}
