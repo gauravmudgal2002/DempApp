@@ -12,22 +12,7 @@
         <script><![CDATA[var TestScript = Class.create();
 TestScript.prototype = {
     initialize: function() {
-		//Added feature
-		// Added comment 1
-		// Added comment 2
-		// Added comment 3
-		// Added comment 5
-		// Added comment 6
-		// Added comment 7
-		// Added comment 8
-
-		// Added comment 10
-		// Added comment 21
-		// Added comment by Gaurav Mudga110
-		// Added comment by sdg100
-		//New Comment Added123
-
-		// Added comment 11
+	// Added comment 223
 
     },
 
@@ -37,20 +22,14 @@ TestScript.prototype = {
         <sys_created_by>gaurav.mudgal</sys_created_by>
         <sys_created_on>2025-07-11 10:21:37</sys_created_on>
         <sys_id>9038c6af93a66a10ea1eb3ad1dba1034</sys_id>
-
-        <sys_mod_count>45</sys_mod_count>        
-
+        <sys_mod_count>47</sys_mod_count>
         <sys_name>TestScript</sys_name>
         <sys_package display_value="Demo App" source="x_niit3_demo_app">1c97ce6f93a66a10ea1eb3ad1dba10b1</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="Demo App">1c97ce6f93a66a10ea1eb3ad1dba10b1</sys_scope>
         <sys_update_name>sys_script_include_9038c6af93a66a10ea1eb3ad1dba1034</sys_update_name>
         <sys_updated_by>gaurav.mudgal</sys_updated_by>
-cfg_str227105
-        <sys_updated_on>2025-07-22 07:42:50</sys_updated_on>
-
-   
-
+        <sys_updated_on>2025-07-22 15:51:35</sys_updated_on>
     </sys_script_include>
     <sys_es_latest_script action="INSERT_OR_UPDATE">
         <id>9038c6af93a66a10ea1eb3ad1dba1034</id>
