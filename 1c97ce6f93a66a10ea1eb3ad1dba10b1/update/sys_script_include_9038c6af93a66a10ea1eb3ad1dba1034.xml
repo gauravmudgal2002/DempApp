@@ -18,6 +18,7 @@ TestScript.prototype = {
 	//Added Comment 223 - GMChanges9
 	//Added Comment 223 - GMChanges10
 	//Added Comment 12/10 - Demo GM Changes Aug release
+
     },
 
     type: 'TestScript'
